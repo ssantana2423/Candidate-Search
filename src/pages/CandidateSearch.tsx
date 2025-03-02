@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { searchGithub, searchGithubUser } from "../api/API";
+import { Candidate } from "../interfaces/Candidate.interface";
+
 
 const CandidateSearch = () => {
   const [search, setSearch] = useState([]);
   const [index, setIndex] = useState(0);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState<Candidate>({id: null, login: null, email: null, html_url: null, name: null, avatar_url: null, bio: null, company: null, location: null});
   useEffect(() => {
     async function fetchData() {
       if (search.length === 0) {
@@ -41,19 +43,7 @@ const CandidateSearch = () => {
         <p>{user.bio ? user.bio : "userbio not available"}</p>
         <p>{user.location ? user.location : "userlocation not available"}</p>
         <p>{user.email ? user.email : "useremail not available"}</p>
-        <p>{user.blog ? user.blog : "userblog not available"}</p>
-        <p>
-          {user.twitter_usernametwitter
-            ? user.twitter_username
-            : "usertwitterusername not available"}
-        </p>
-        <p>
-          {user.public_repos
-            ? user.public_repos
-            : "userpublic_repos not available"}
-        </p>
-        <p>{user.followers ? user.followers : "userfollowers not available"}</p>
-        <p>{user.following ? user.following : "userfollowing not available"}</p>
+        
       </div>
       <div>
         <button onClick={() => saveCandidate()}> Save</button>
